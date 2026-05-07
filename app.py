@@ -4,11 +4,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Bot running"
+    return "Bot running", 200
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    data = request.json
-    print(data)
+    try:
+        data = request.get_json(force=True)
 
-    return "ok", 200
+        print("===== WEBHOOK RECEIVED =====")
+        print(data)
+
+        return "ok", 200
+
+    except Exception as e:
+        print("ERROR:", str(e))
+        return "error", 200
