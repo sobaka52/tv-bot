@@ -8,14 +8,9 @@ def home():
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    try:
-        data = request.get_json(force=True)
+    data = request.get_json(force=True)
 
-        print("===== WEBHOOK RECEIVED =====")
-        print(data)
+    print("===== WEBHOOK RECEIVED =====")
+    print(data)
 
-        return "ok", 200
-
-    except Exception as e:
-        print("ERROR:", str(e))
-        return "error", 200
+    return "ok", 200
